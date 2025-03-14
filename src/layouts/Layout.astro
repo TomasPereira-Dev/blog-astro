@@ -1,3 +1,7 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+---
 <!doctype html>
 <html lang="en">
 	<head>
@@ -7,16 +11,13 @@
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
 	</head>
-	<body>
+	<body class="p-4 bg-dark">
+		<Header/>
+		<main>
+			<h1 class="mb-3 text-3xl text-white font-bold underline underline-under decoration-sky-300 decoration-6">Lorem ipsum</h1>
+			<p class="text-white/80">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum sequi facilis possimus quibusdam et? Sapiente optio earum obcaecati? Rem aperiam dicta delectus quisquam cumque velit earum quidem dolore laborum ullam?</p>
+		</main>
 		<slot />
 	</body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
