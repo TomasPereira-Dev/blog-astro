@@ -1,0 +1,31 @@
+---
+import type { GetStaticPaths } from "astro";
+import type { SanityDocument } from "@sanity/client";
+import { loadQuery } from "../sanity/lib/load-query.ts";
+
+export const getStaticPaths = (async () => {
+    const {data: posts} = await loadQuery<SanityDocument[]>({
+        query: `*[_type == "post"]`,
+    });
+
+    return posts.map(({slug}) => {
+        return {
+            params: {
+                slug: slug.current,
+            },
+        };
+    });
+
+}) satisfies GetStaticPaths;
+
+const { params } = Astro;
+
+const { data: post } = await loadQuery({
+  query: `*[_type == "post" && slug.current == $slug][0]`,
+  params,
+});
+
+---
+
+<h1>{post.title}</h1>
+
