@@ -7,3 +7,16 @@
     --font-sans: 'DM Sans', sans-serif;
     --font-mono: 'Fira Code', monospace; 
 }
+
+@layer components {
+    .article{
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        & h2{
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    }
+}

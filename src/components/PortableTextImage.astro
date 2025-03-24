@@ -2,12 +2,12 @@
 // ./src/components/PortableTextImage.astro
 import { urlForImage } from "../sanity/lib/url-for-image";
 
-const { asset, alt } = Astro.props.node;
+const { asset, alt } = Astro.props;
 const url = urlForImage(asset).url();
-const webpUrl = urlForImage(asset).format("webp").url();
+const webpUrl = urlForImage(asset).width(1200).format("webp").url();
 ---
 
 <picture>
   <source srcset={webpUrl} type="image/webp" />
-  <img class="responsive__img" src={url} alt={alt} />
+  <img src={url} alt={alt} />
 </picture>

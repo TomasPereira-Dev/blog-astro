@@ -2,6 +2,12 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
+import { loadQuery } from "../sanity/lib/load-query";
+
+const {data: post} = await loadQuery({
+    query: `*[_type == "post"]{title, description, publishedAt, slug} | order(publishedAt desc) [0..5]`,
+});
+console.log(post)
 ---
 
 <!doctype html>
@@ -18,31 +24,13 @@ import "../styles/global.css";
         <h1 class="relative text-3xl text-white font-bold w-fit after:absolute after:bottom-2 after:-right-[2.5ch] after:content-[_] after:p-[2px] after:w-[2ch] after:bg-sky-400">My articles</h1>
         <h2 class="text-xl text-white/50">Below are all my recent blog posts. Click on any title to read the full article.</h2>
         <ul class="space-y-4 divide-y-2 divide-white/95">
-            <li class="py-4">
-                <a href="#"><h3 class="text-xl text-white font-semibold">SAMPLE TITLE</h3></a>
-                <h4 class="text-white/50 italic">April 9, 2025</h4>
-                <h5 class="text-lg text-white/50">SAMPLE DESCRIPTION</h5>
-            </li>
-            <li class="py-4">
-                <a href="#"><h3 class="text-xl text-white font-semibold">SAMPLE TITLE</h3></a>
-                <h4 class="text-white/50 italic">April 9, 2025</h4>
-                <h5 class="text-lg text-white/50">SAMPLE DESCRIPTION</h5>
-            </li>
-            <li class="py-4">
-                <a href="#"><h3 class="text-xl text-white font-semibold">SAMPLE TITLE</h3></a>
-                <h4 class="text-white/50 italic">April 9, 2025</h4>
-                <h5 class="text-lg text-white/50">SAMPLE DESCRIPTION</h5>
-            </li>
-            <li class="py-4">
-                <a href="#"><h3 class="text-xl text-white font-semibold">SAMPLE TITLE</h3></a>
-                <h4 class="text-white/50 italic">April 9, 2025</h4>
-                <h5 class="text-lg text-white/50">SAMPLE DESCRIPTION</h5>
-            </li>
-            <li class="py-4">
-                <a href="#"><h3 class="text-xl text-white font-semibold">SAMPLE TITLE</h3></a>
-                <h4 class="text-white/50 italic">April 9, 2025</h4>
-                <h5 class="text-lg text-white/50">SAMPLE DESCRIPTION</h5>
-            </li>
+            {post.map((item: any) => (
+                <li class="py-4">
+                    <a href={`/${item.slug.current}`}><h3 class="text-xl text-white font-semibold">{item.title}</h3></a>
+                    <h4 class="text-white/50 italic">{new Date(item.publishedAt).toLocaleString("es-AR", {timeZone: "GMT", day:"numeric", month:"long", year:"numeric"})}</h4>
+                    <h5 class="text-lg text-white/50">{item.description}</h5>
+                </li>
+            ))}
         </ul>
     </main>
     <Footer />
