@@ -1,3 +1,8 @@
+---
+
+
+---
+
 
 <header class="relative z-50 top-2 right-[1%] flex items-center justify-between p-2 w-[102%] bg-[#201F1D] border border-white/25 rounded-lg">
         <div>
@@ -9,12 +14,23 @@
                 <a class="text-white " href="/">Home</a>
                 <a class="text-white " href="/articles">Articles</a>
                 <a class="text-white " href="/about">About</a>
-                <a class="text-white " href="/newsletter">Newsletter</a>
             </nav>
-            <div class="space-x-2">
-                <button class="lg:hidden"><img src="./icon-menu.svg" alt=" "></button>
-                <button class="p-2 border bg-dark border-white/25 rounded-lg"><img src="./icon-sun.svg" alt=" "></button>
+            <div>
+                <button class="p-2 menu"><img class="w-[1.125rem] h-[1.125rem]" src="/menu.svg" alt=" "></button>
+                <button class="p-2 border bg-dark border-white/25 rounded-lg"><img src="/icon-sun.svg" alt=" "></button>
             </div>
         </div>
 
 </header>
+
+<script>
+
+    const menuButton = document.querySelector(".menu") as HTMLButtonElement;
+    let menuIsOpen: boolean = false; 
+
+    menuButton.addEventListener("click", () => {
+    menuIsOpen = !menuIsOpen;
+    console.log(menuIsOpen);
+    });
+
+</script>
