@@ -1,6 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fira+Code:wght@300..700&display=swap');
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dark{
+    background-color: #FBF9F7;
+    
+        & header, footer, main{
+            background-color: white;
+            border: 1px solid #e7e6e4;
+            & h1, h2, h3, h4, p, a{
+                color: oklch(0.31 0.0076 59.95);
+            }
+        }
+
+        & svg > path{
+            stroke: oklch(0.31 0.0076 59.95);
+            fill: oklch(0.31 0.0076 59.95);
+        }
+}
 
 @theme {
     --color-dark: #1C1B19;
@@ -23,6 +41,5 @@
 
 
 
-@custom-variant dark (&:where(.dark, .dark *))
 
 
