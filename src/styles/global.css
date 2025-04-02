@@ -12,6 +12,9 @@
             & h1, h2, h3, h4, p, a{
                 color: oklch(0.31 0.0076 59.95);
             }
+            li > a > h3:hover{
+                color: oklch(0.31 0.0076 59.95 / 75%);
+            }
         }
 
         & svg > path{
@@ -35,6 +38,11 @@
         & h2{
             font-size: 1.5rem;
             font-weight: bold;
+        }
+
+        & p {
+            font-size: 1rem;
+            max-width: 75ch;
         }
     }
 }

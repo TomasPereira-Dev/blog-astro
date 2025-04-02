@@ -4,13 +4,13 @@ import MobileMenu from "./MobileMenu.astro";
 
 <header class="relative z-50 top-2 right-[1%] flex items-center justify-between p-2 w-[102%] bg-[#201F1D] border border-white/25 rounded-lg">
         <div>
-            <img class="rounded-lg" width="36" height="36" src="./image-avatar.jpg" alt="un retrato de tomas pereira">
+            <a href="/"><img class="rounded-lg" width="36" height="36" src="./image-avatar.jpg" alt="un retrato de tomas pereira"></a>
         </div>
     
         <div class="flex gap-4">
             <nav class="hidden lg:flex items-center gap-4">
-                <a class="text-white hover:underline hover:underline-offset-6 hover:decoration-3 hover:decoration-sky-400" href="/">Home</a>
-                <a class="text-white hover:underline hover:underline-offset-6 hover:decoration-3 hover:decoration-sky-400 " href="/articles">Articles</a>
+                <a class="text-white hover:underline hover:underline-offset-6 hover:decoration-3 hover:decoration-sky-400"  href="/">Home</a>
+                <a class="text-white hover:underline hover:underline-offset-6 hover:decoration-3 hover:decoration-sky-400" href="/articles">Articles</a>
                 <a class="text-white hover:underline hover:underline-offset-6 hover:decoration-3 hover:decoration-sky-400 " href="/about">About</a>
             </nav>
             <div >
@@ -35,7 +35,16 @@ import MobileMenu from "./MobileMenu.astro";
     const hamburgerIcon = document.querySelector(".menu-hamburger-icon") as SVGElement;
     const darkmodeOffIcon = document.querySelector(".darkmode-off-icon") as SVGElement;
     const darkmodeOnIcon = document.querySelector(".darkmode-on-icon") as SVGElement;
-    const htmlTag = document.querySelector("html") as HTMLElement; 
+    const htmlTag = document.querySelector("html") as HTMLElement;
+    
+
+    const temp = localStorage.getItem("darkMode")!;
+    htmlTag.classList.toggle(temp);
+    if(temp){
+        darkmodeOffIcon.classList.toggle("hidden");
+        darkmodeOnIcon.classList.toggle("hidden");
+    }
+    
 
     let themeAriaFlag = false;
     let menuAriaFlag = false;
@@ -55,5 +64,8 @@ import MobileMenu from "./MobileMenu.astro";
         darkmodeOffIcon.classList.toggle("hidden");
         darkmodeOnIcon.classList.toggle("hidden");
         htmlTag.classList.toggle("dark");
+
+        temp ? localStorage.removeItem("darkMode") : localStorage.setItem("darkMode", "dark");
+        
     })
 </script>

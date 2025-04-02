@@ -25,16 +25,17 @@ export const getStaticPaths = (async () => {
 const { params } = Astro;
 
 const { data: post } = await loadQuery({
-  query: `*[_type == "post" && slug.current == $slug][0]{mainImage{..., alt}, publishedAt, title, body}`,
+  query: `*[_type == "post" && slug.current == $slug][0]{mainImage{..., alt}, publishedAt, title, description, body}`,
   params,
 });
 ---
 
-<Layout>
-    <div>
+<Layout title={post.title}>
+    <section class="">
         <h1 class="text-3xl text-white/85 font-bold">{post.title}</h1>
-        <p class="text-sm text-white/85 italic">Publicado el {new Date(post.publishedAt).toLocaleString("es-AR", {timeZone: "GMT", day: "numeric", month: "long", year: "numeric"})}</p>    
-    </div>
+        <h2 class="text-xl text-white/75 font-semibold">{post.description}</h2>
+        <h3 class="mt-2 text-sm text-white/85 italic">Publicado el <time datetime={post.publishedAt.toLocaleString("es-AR", {timeZone: "GMT", day: "numeric", month: "long", year: "numeric"})}>{new Date(post.publishedAt).toLocaleString("es-AR", {timeZone: "GMT", day: "numeric", month: "long", year: "numeric"})}</time></h3>    
+    </section>
     <PortableTextImage asset={post.mainImage.asset} alt={post.mainImage.alt} />
     <section class="mt-8 text-white/85">
         <article class="article">

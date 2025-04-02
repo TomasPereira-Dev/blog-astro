@@ -7,7 +7,7 @@ const {data: post} = await loadQuery({
     query: `*[_type == "post"]{title, description, publishedAt, slug} | order(publishedAt desc) [0..5]`,
 });
 ---
-<Layout>
+<Layout title="Artículos">
     <section class="px-2 py-8 space-y-6">
         <div class="space-y-2">
             <h1 class="relative text-3xl text-white font-bold w-fit after:absolute after:bottom-2 after:-right-[2.5ch] after:content-[_] after:p-[2px] after:w-[2ch] after:bg-sky-400">My articles</h1>
@@ -16,7 +16,7 @@ const {data: post} = await loadQuery({
         <ul class="space-y-4 divide-y-2 divide-white/95">
             {post.map((item: any) => (
                 <li class="py-4 w-fit">
-                    <a href={`/${item.slug.current}`}><h3 class="text-xl text-white font-semibold">{item.title}</h3></a>
+                    <a href={`/${item.slug.current}`}><h3 class="text-xl text-white font-semibold hover:text-white/75">{item.title}</h3></a>
                     <h4 class="text-white/50 italic">{new Date(item.publishedAt).toLocaleString("es-AR", {timeZone: "GMT", day:"numeric", month:"long", year:"numeric"})}</h4>
                     <h5 class="text-lg text-white/50">{item.description}</h5>
                 </li>

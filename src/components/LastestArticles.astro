@@ -3,6 +3,7 @@ import { loadQuery } from "../sanity/lib/load-query";
 
 interface item{
     title: string;
+    description: string;
     publishedAt: string;
     slug: {
         current: string;
@@ -21,10 +22,11 @@ const { data: post } = await loadQuery({
         post.map((item: item) => (
             <li class="w-fit">
                 <a href={`/${item.slug.current}`}><h3 class="text-xl text-white font-semibold hover:text-white/25">{item.title}</h3></a>
-                <h4 class="text-white/50 italic">Publicado el {new Date(item.publishedAt).toLocaleString("es-AR", {timeZone: "GMT", day:"numeric", month:"long", year: "numeric"})}</h4>
+                <h4 class="text-white/50">{item.description}</h4>
+                <h4 class="text-sm text-white/50 italic">Publicado el {new Date(item.publishedAt).toLocaleString("es-AR", {timeZone: "GMT", day:"numeric", month:"long", year: "numeric"})}</h4>
             </li>
         ))
     }
     </ul>
-    <a href="/articles" class="text-white text-lg font-semibold underline underline-offset-4 decoration-4 decoration-sky-400 hover:text-white/25">View all articles</a>
+    <a href="/articles" class="text-white text-lg font-semibold underline underline-offset-4 decoration-4 decoration-sky-400">View all articles</a>
 </section>
